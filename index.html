@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#18030d">
+<title>For Someone Special ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10030a;color:white;
+ font-family:Georgia,serif;overflow:hidden;
+}
+.page{
+ min-height:100dvh;width:100%;
+ display:flex;align-items:center;
+ justify-content:center;flex-direction:column;
+ text-align:center;padding:25px;
+}
+#intro{
+ background:radial-gradient(circle,#661c37,#210817 65%,#080207);
+}
+.heart{
+ font-size:75px;
+ animation:beat 1s infinite;
+ filter:drop-shadow(0 0 20px #ff356c);
+}
+@keyframes beat{
+ 50%{transform:scale(1.2)}
+}
+h1{color:#ff9ab8;font-size:30px}
+p{line-height:1.8;color:#f5c7d5}
+button{
+ padding:17px 28px;background:#c72d60;
+ border:1px solid #ff9ab8;border-radius:30px;
+ color:white;font-size:16px;font-weight:bold;
+ margin-top:20px;
+}
+#letter{
+ display:none;
+ background:linear-gradient(140deg,#330d20,#160611);
+}
+#letter h1{font-size:26px}
+#letterText{
+ max-width:340px;font-size:19px;
+ min-height:150px;
+}
+#scare{
+ display:none;position:fixed;inset:0;
+ background:#000;z-index:10;
+ align-items:center;justify-content:center;
+}
+#ghost{
+ width:100%;height:100%;
+ animation:zoom .09s infinite alternate;
+}
+@keyframes zoom{
+ from{transform:scale(1.05)}
+ to{transform:scale(1.5)}
+}
+#flash{
+ position:absolute;inset:0;
+ pointer-events:none;
+ animation:blink .09s infinite;
+}
+@keyframes blink{
+ 0%,100%{background:transparent}
+ 50%{background:rgba(150,0,0,.65)}
+}
+#scareText{
+ position:absolute;bottom:7%;
+ color:red;font-family:Arial;
+ font-size:25px;font-weight:900;
+ text-shadow:0 0 20px red;
+}
+#ending{
+ display:none;background:#080008;
+}
+#ending h1{color:red}
+</style>
+</head>
+<body>
+
+<div id="intro" class="page">
+ <div class="heart">❤️</div>
+ <h1>For Someone Special</h1>
+ <p>Aku punya sesuatu yang ingin aku sampaikan...</p>
+ <p>Sudah lama aku ingin mengatakan ini kepadamu.</p>
+ <button onclick="openLetter()">BUKA PESAN SAYANG ❤️</button>
+ <p style="font-size:12px">Dari seseorang yang selalu memikirkanmu.</p>
+</div>
+
+<div id="letter" class="page">
+ <div style="font-size:45px">🌹</div>
+ <h1>Untuk Kamu...</h1>
+ <div id="letterText">
+ Aku mungkin bukan orang yang sempurna...
+ </div>
+ <p>❤️ ❤️ ❤️</p>
+</div>
+
+<div id="scare">
+ <svg id="ghost" viewBox="0 0 400 700"
+ xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <radialGradient id="skin">
+   <stop stop-color="#eee"/>
+   <stop offset=".7" stop-color="#777"/>
+   <stop offset="1" stop-color="#111"/>
+  </radialGradient>
+  <filter id="glow">
+   <feGaussianBlur stdDeviation="12"/>
+  </filter>
+ </defs>
+ <rect width="400" height="700" fill="#000"/>
+ <path d="M30 0 Q0 300 20 700 L380 700 Q400 300 370 0Z"
+ fill="#070707"/>
+ <ellipse cx="200" cy="340" rx="145" ry="255"
+ fill="url(#skin)"/>
+ <path d="M35 0 Q0 250 20 700 L380 700 Q400 250 365 0
+ Q280 60 200 0 Q100 60 35 0Z" fill="#050505"/>
+ <path d="M75 280 Q130 220 180 280 Q130 335 75 280"
+ fill="#000"/>
+ <path d="M220 280 Q275 220 325 280 Q275 335 220 280"
+ fill="#000"/>
+ <ellipse cx="130" cy="280" rx="15" ry="20"
+ fill="#f00" filter="url(#glow)"/>
+ <ellipse cx="270" cy="280" rx="15" ry="20"
+ fill="#f00" filter="url(#glow)"/>
+ <ellipse cx="130" cy="280" rx="8" ry="13" fill="red"/>
+ <ellipse cx="270" cy="280" rx="8" ry="13" fill="red"/>
+ <path d="M200 300 L175 420 L220 430"
+ stroke="#333" stroke-width="14" fill="none"/>
+ <ellipse cx="200" cy="500" rx="75" ry="110" fill="#080000"/>
+ <path d="M135 480 Q200 620 265 480"
+ stroke="#ddd" stroke-width="8" fill="none"/>
+ <path d="M145 490 L155 540 L175 500 L195 555
+ L215 500 L235 540 L255 485" fill="#eee"/>
+ </svg>
+ <div id="flash"></div>
+ <div id="scareText">AKU ADA DI BELAKANGMU!</div>
+</div>
+
+<div id="ending" class="page">
+ <h1>WKWKWKWK 😂</h1>
+ <h2>KAMU KENA PRANK!</h2>
+ <p>Surat cinta tadi cuma jebakan. 👻</p>
+ <button onclick="location.reload()">ULANGI PRANK</button>
+</div>
+
+<script>
+let audio;
+
+function openLetter(){
+ document.getElementById("intro").style.display="none";
+ document.getElementById("letter").style.display="flex";
+
+ // Aktifkan audio saat tombol disentuh
+ try{
+  audio=new(window.AudioContext||window.webkitAudioContext)();
+  audio.resume();
+ }catch(e){}
+
+ const messages=[
+  "Aku mungkin bukan orang yang sempurna...",
+  "Tapi ada satu hal yang ingin aku katakan...",
+  "Kamu adalah seseorang yang sangat spesial...",
+  "Dan aku ingin kamu tahu bahwa...",
+  "AKU SUKA KAMU ❤️"
+ ];
+
+ let i=0;
+ let el=document.getElementById("letterText");
+
+ function next(){
+  if(i<messages.length){
+   el.textContent=messages[i];
+   i++;
+   setTimeout(next,1800);
+  }else{
+   setTimeout(jumpscare,1800);
+  }
+ }
+ next();
+}
+
+function jumpscare(){
+ const scare=document.getElementById("scare");
+ scare.style.display="flex";
+
+ if(navigator.vibrate){
+  navigator.vibrate([300,100,500,100,700]);
+ }
+
+ // Efek suara sintetis berlapis
+ if(audio){
+  const now=audio.currentTime;
+
+  function noise(freq,end,duration,volume,type){
+   let o=audio.createOscillator();
+   let g=audio.createGain();
+
+   o.type=type;
+   o.frequency.setValueAtTime(freq,now);
+   o.frequency.exponentialRampToValueAtTime(
+    end,now+duration
+   );
+
+   g.gain.setValueAtTime(volume,now);
+   g.gain.exponentialRampToValueAtTime(
+    .001,now+duration
+   );
+
+   o.connect(g);
+   g.connect(audio.destination);
+   o.start(now);
+   o.stop(now+duration);
+  }
+
+  noise(950,65,1.5,.5,"sawtooth");
+  noise(160,35,1.8,.35,"square");
+  noise(600,100,1.4,.3,"triangle");
+  noise(1200,90,1.2,.25,"sawtooth");
+ }
+
+ setTimeout(()=>{
+  scare.style.display="none";
+  document.getElementById("ending").style.display="flex";
+ },3000);
+}
+</script>
+</body>
+</html>
